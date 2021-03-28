@@ -85,6 +85,16 @@ class DysonPureCoolAirQualityEntity(DysonAirQualityEntity):
     """Dyson Pure Cool air quality entity."""
 
     @environmental_property
+    def air_quality_index(self):
+        """Return the Air Quality Index (AQI)."""
+        return max(
+            self.particulate_matter_2_5,
+            self.particulate_matter_10,
+            self.nitrogen_dioxide,
+            self.volatile_organic_compounds,
+        )
+
+    @environmental_property
     def particulate_matter_2_5(self):
         """Return the particulate matter 2.5 level."""
         return self._device.particulate_matter_2_5
